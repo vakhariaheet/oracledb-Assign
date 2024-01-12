@@ -1,0 +1,18 @@
+DECLARE
+    MARK1      NUMBER(4, 2) := &MARK1;
+    MARK2      NUMBER(4, 2) := &MARK2;
+    MARK3      NUMBER(4, 2) := &MARK3;
+    PERCENTAGE NUMBER(4, 2);
+BEGIN
+    PERCENTAGE := (MARK1 + MARK2 + MARK3) / 3;
+    IF PERCENTAGE >= 60 THEN
+        DBMS_OUTPUT.PUT_LINE('Division : First');
+    ELSIF PERCENTAGE >=50 THEN
+        DBMS_OUTPUT.PUT_LINE('Division: Second');
+    ELSIF PERCENTAGE >=30 THEN
+        DBMS_OUTPUT.PUT_LINE('Division: Third');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Fail');
+    END IF;
+END;
+/
