@@ -1,8 +1,3 @@
--- Write a program that will accept user’s choice as 1 or 2.
--- - If user enters 1 than accept principle amount ,rate,time
--- from user and calculate the simple interest si=(p*t*r)/100
--- -If user enters 2 than accept pi, r from user and calculate
--- the area of circle
 DECLARE
     CHOICE    INT := &CH;
     PRINCIPLE DECIMAL(10, 2);

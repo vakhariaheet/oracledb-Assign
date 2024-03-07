@@ -1,0 +1,24 @@
+CREATE OR REPLACE PROCEDURE MIN_OF_2 (
+    NUM1 IN INT,
+    NUM2 IN INT,
+    OUTPUT OUT INT
+) IS
+BEGIN
+    IF NUM1 > NUM2 THEN
+        OUTPUT := NUM2;
+    ELSE
+        OUTPUT := NUM1;
+    END IF;
+END MIN_OF_2;
+/
+
+DECLARE
+    NUM1   INT := &NUM1;
+    NUM2   INT := &NUM2;
+    OUTPUT INT;
+BEGIN
+    MIN_OF_2(NUM1, NUM2, OUTPUT);
+    DBMS_OUTPUT.PUT_LINE('MIN : '
+                         || OUTPUT);
+END;
+/

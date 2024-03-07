@@ -1,0 +1,26 @@
+CREATE OR REPLACE PROCEDURE UPDATE_SALARY AS
+BEGIN
+    UPDATE EMPLOYEE
+    SET
+        SALARY = SALARY + 1000
+    WHERE
+        ENAME LIKE 'A%';
+END UPDATE_SALARY;
+/
+
+DECLARE
+    V_EMPLOYEE EMPLOYEE%ROWTYPE;
+BEGIN
+    UPDATE_SALARY;
+    SELECT
+        * INTO V_EMPLOYEE
+    FROM
+        EMPLOYEE
+    WHERE
+        ENAME LIKE 'A%';
+    DBMS_OUTPUT.PUT_LINE('EMPLOYEE NAME: '
+                         || V_EMPLOYEE.ENAME
+                         || ' SALARY: '
+                         || V_EMPLOYEE.SALARY);
+END;
+/

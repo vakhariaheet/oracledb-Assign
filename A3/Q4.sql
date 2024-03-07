@@ -1,0 +1,19 @@
+CREATE OR REPLACE FUNCTION MAXAGE RETURN INT AS
+    MAXAGE INT;
+BEGIN
+    SELECT
+        MAX(AGE) INTO MAXAGE
+    FROM
+        PERSON;
+    RETURN MAXAGE;
+END MAXAGE;
+/
+
+DECLARE
+    MAX INT;
+BEGIN
+    MAX := MAXAGE();
+    DBMS_OUTPUT.PUT_LINE('Max age is: '
+                         || MAX);
+END;
+/
