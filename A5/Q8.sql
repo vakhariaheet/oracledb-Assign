@@ -1,0 +1,65 @@
+CREATE OR REPLACE PACKAGE EMP_P IS
+
+    PROCEDURE ADD_EMP(
+        NO EMPLOYEE.ENO%TYPE,
+        NAME EMPLOYEE.ENAME%TYPE,
+        DEPARTMENT EMPLOYEE.DEPARTMENT%TYPE,
+        SALARY EMPLOYEE.SALARY%TYPE
+    );
+
+    FUNCTION GET_MAX_SAL RETURN NUMBER;
+END EMP_P;
+/
+
+CREATE OR REPLACE PACKAGE BODY EMP_P IS
+
+    PROCEDURE ADD_EMP(
+        NO EMPLOYEE.ENO%TYPE,
+        NAME EMPLOYEE.ENAME%TYPE,
+        DEPARTMENT EMPLOYEE.DEPARTMENT%TYPE,
+        SALARY EMPLOYEE.SALARY%TYPE
+    ) IS
+    BEGIN
+        INSERT INTO EMPLOYEE VALUES(
+            NO,
+            NAME,
+            DEPARTMENT,
+            SALARY
+        );
+        DBMS_OUTPUT .PUT_LINE(NO
+                              || ' Inserted');
+    END ADD_EMP;
+
+    FUNCTION GET_MAX_SAL RETURN NUMBER AS
+        MAX_SAL NUMBER;
+    BEGIN
+        SELECT
+            SALARY INTO MAX_SAL
+        FROM
+            EMPLOYEE
+        WHERE
+            SALARY = (
+                SELECT
+                    MAX(SALARY)
+                FROM
+                    EMPLOYEE
+            )
+            AND ROWNUM = 1;
+        RETURN MAX_SAL;
+    END GET_MAX_SAL;
+END EMP_P;
+/
+
+DECLARE
+    NO         EMPLOYEE.ENO%TYPE := &ENO;
+    NAME       EMPLOYEE.ENAME%TYPE := '&NAME';
+    DEPARTMENT EMPLOYEE.DEPARTMENT%TYPE := '&DEPARTMENT';
+    SALARY     EMPLOYEE.SALARY%TYPE := &SALARY;
+    MAX_SAL    NUMBER;
+BEGIN
+    EMP_P.ADD_EMP(NO, NAME, DEPARTMENT, SALARY);
+    MAX_SAL := EMP_P.GET_MAX_SAL();
+    DBMS_OUTPUT.PUT_LINE('Max Salary is '
+                         || MAX_SAL);
+END;
+/
